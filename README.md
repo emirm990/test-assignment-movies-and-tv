@@ -1,3 +1,3 @@
 # test-assignment-movies-and-tv
 
-Korišten bootstrap i JavaScript
+Used only bootsrap and plain JavaScript
