@@ -12,11 +12,11 @@
 }
 .modal-content {
   background-color: #fefefe;
-  margin: 3% auto;
+  margin: 2% auto;
+  margin-bottom: 1%;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
-  height: 95vh;
+  width: 450px;
 }
 .close {
   color: #aaa;
@@ -34,4 +34,11 @@
 .img-fluid{
   max-width: 400px;
   margin: 0 auto;
+}
+@media only screen and (max-width: 500px){
+  .modal-content{
+    padding:5px;
+    margin: 0 auto;
+    width: 100%;
+  }
 }
