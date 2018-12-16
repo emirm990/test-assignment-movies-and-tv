@@ -81,11 +81,12 @@ async function getById(id){
         responseVideo = await fetch("https://api.themoviedb.org/3/tv/" + id + "/videos?api_key=" + apiKey + "&language=en-US");
         videoJson = await responseVideo.json();
         if (videoJson.results != 0){
-            console.log(videoJson.results);
+            
             for (index in videoJson.results){
-                
+                console.log(videoJson.results);
                 if(videoJson.results[index].type == "Trailer"){
                     detailsContentTrailer(videoJson.results[0].key, json.name, json.overview);
+                    break;
                 } else detailsContent(json.poster_path, json.name, json.overview);
             }
         }else detailsContent(json.poster_path, json.name, json.overview);   
@@ -98,12 +99,14 @@ async function getById(id){
             for (index in videoJson.results){
                 if(videoJson.results[index].type == "Trailer"){
                     detailsContentTrailer(videoJson.results[0].key, json.title, json.overview);
+                    break;
                 } //else detailsContent(json.poster_path, json.title, json.overview);
             }
         }else detailsContent(json.poster_path, json.title, json.overview);   
         //detailsContent(json.poster_path, json.title, json.overview);
     }
-    }
+}
+
 search.addEventListener("input", function(){
     movies.innerHTML = "";
     if (search.value.length > 2){
@@ -115,7 +118,6 @@ search.addEventListener("input", function(){
     }
     
 })
-
 moviesButton.addEventListener("click", function(){
     tvButton.classList.remove("btn-primary");
     moviesButton.classList.add("btn-primary");
@@ -127,7 +129,6 @@ moviesButton.addEventListener("click", function(){
     search.value = '';
     getData("movie"); 
 });
-
 tvButton.addEventListener("click", function(){
     tvButton.classList.add("btn-primary");
     moviesButton.classList.remove("btn-primary");
@@ -138,7 +139,6 @@ tvButton.addEventListener("click", function(){
     search.value = '';
     getData("tv");
 })
-
 movies.addEventListener("click", function(event){
     modal.style.display = "block";
     let id = event.target.parentElement.id;
@@ -147,12 +147,22 @@ movies.addEventListener("click", function(event){
 })
 span.onclick = function() {
     modal.style.display = "none";
-    video.src = video.src;
+    try {
+        video.src = video.src;
+    }
+    catch(err){
+        console.log(err);
+    }
 }
 window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = "none";
-    video.src = video.src;
+    try{
+        video.src = video.src;
+    }
+    catch(err){
+        console.log(err);
+    }
   }
 }
 getData("tv");
